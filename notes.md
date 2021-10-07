@@ -98,3 +98,65 @@ function App() {
 export default App;
 ```
 
+## Video 5 - Multiple Components
+
+![](note-imgs/Component-Tree.png)
+
+App.js
+```js
+// import logo from './logo.svg';
+import './App.css';
+import Navbar from './Navbar';
+import Home from './Home';
+
+function App() {
+  const title = 'Welcome to the new blog';
+  const likes = 50;
+  // const person = { name: 'yoshi', age: 30 };
+  const link = "http://www.google.com";
+
+  return (
+    <div className="App">
+      <Navbar />
+      <div className="content">
+        <Home />
+      </div>
+    </div>
+  );
+}
+
+export default App;
+```
+
+Navbar.js
+```js
+const Navbar = () => {
+    return (
+        <nav className="navbar">
+            <h1>The Dojo Blog</h1>
+            <div className="link">
+                <a href="/">Home</a>
+                <a href="/create">New Blog</a>
+                
+            </div>
+        </nav>
+    );
+}
+ 
+export default Navbar;
+```
+
+Home.js
+```js
+const Home = () => {
+    return (
+        <div className="home">
+            <h2>Homepage</h2>
+        </div>
+    );
+}
+ 
+export default Home;
+```
+
+Kurduğumuz eklenti ile `sfc` yazarak hızlı bir şekilde component setup'ı yapabiliyoruz.
