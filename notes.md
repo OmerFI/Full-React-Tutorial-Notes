@@ -164,7 +164,7 @@ export default Home;
 
 Kurduğumuz eklenti ile `sfc` yazarak hızlı bir şekilde component setup'ı yapabiliyoruz.
 
-## Video 6 - Adding Styles:
+## Video 6 - Adding Styles
 
 index.css
 
@@ -230,3 +230,33 @@ const Navbar = () => {
 
 export default Navbar;
 ```
+
+## Video 7 - Click Events
+
+Home.js
+
+```js
+const Home = () => {
+  // otomatik olarak event object verilir fonksiyona
+  const handleClick = (e) => {
+    console.log("hello, ninjas");
+  };
+
+  const handleClickAgain = (name, e) => {
+    console.log("hello " + name, e.target); // DOM eğitimindeki gibi
+  };
+
+  return (
+    <div className="home">
+      <h2>Homepage</h2>
+      <button onClick={handleClick}>Click me</button>
+      <button onClick={(e) => handleClickAgain("mario", e)}>
+        Clicke me again
+      </button>
+    </div>
+  );
+};
+
+export default Home;
+```
+
