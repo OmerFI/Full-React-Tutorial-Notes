@@ -1,0 +1,23 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+dojo-blog/node_modules
+dojo-blog/.pnp
+dojo-blog/.pnp.js
+
+# testing
+dojo-blog//coverage
+
+# production
+dojo-blog/build
+
+# misc
+dojo-blog/.DS_Store
+dojo-blog/.env.local
+dojo-blog/.env.development.local
+dojo-blog/.env.test.local
+dojo-blog/.env.production.local
+
+dojo-blog/npm-debug.log*
+dojo-blog/yarn-debug.log*
+dojo-blog/yarn-error.log*
