@@ -47,9 +47,10 @@ npm run start
 ![](note-imgs/React-Components-2.png)
 
 src/App.js
+
 ```js
 // import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
   return (
@@ -68,10 +69,10 @@ export default App;
 
 ```js
 // import logo from './logo.svg';
-import './App.css';
+import "./App.css";
 
 function App() {
-  const title = 'Welcome to the new blog';
+  const title = "Welcome to the new blog";
   const likes = 50;
   // const person = { name: 'yoshi', age: 30 };
   const link = "http://www.google.com";
@@ -79,15 +80,15 @@ function App() {
   return (
     <div className="App">
       <div className="content">
-        <h1>{ title }</h1>
-        <p>Liked { likes } times</p>
+        <h1>{title}</h1>
+        <p>Liked {likes} times</p>
 
         {/* <p>{ person }</p> */}
 
-        <p>{ 10 }</p>
-        <p>{ "hello, ninjas" }</p>
-        <p>{ [1,2,3,4,5] }</p>
-        <p>{ Math.random() * 10}</p>
+        <p>{10}</p>
+        <p>{"hello, ninjas"}</p>
+        <p>{[1, 2, 3, 4, 5]}</p>
+        <p>{Math.random() * 10}</p>
 
         <a href={link}>Google Site</a>
       </div>
@@ -103,14 +104,15 @@ export default App;
 ![](note-imgs/Component-Tree.png)
 
 App.js
+
 ```js
 // import logo from './logo.svg';
-import './App.css';
-import Navbar from './Navbar';
-import Home from './Home';
+import "./App.css";
+import Navbar from "./Navbar";
+import Home from "./Home";
 
 function App() {
-  const title = 'Welcome to the new blog';
+  const title = "Welcome to the new blog";
   const likes = 50;
   // const person = { name: 'yoshi', age: 30 };
   const link = "http://www.google.com";
@@ -129,34 +131,102 @@ export default App;
 ```
 
 Navbar.js
+
 ```js
 const Navbar = () => {
-    return (
-        <nav className="navbar">
-            <h1>The Dojo Blog</h1>
-            <div className="link">
-                <a href="/">Home</a>
-                <a href="/create">New Blog</a>
-                
-            </div>
-        </nav>
-    );
-}
- 
+  return (
+    <nav className="navbar">
+      <h1>The Dojo Blog</h1>
+      <div className="link">
+        <a href="/">Home</a>
+        <a href="/create">New Blog</a>
+      </div>
+    </nav>
+  );
+};
+
 export default Navbar;
 ```
 
 Home.js
+
 ```js
 const Home = () => {
-    return (
-        <div className="home">
-            <h2>Homepage</h2>
-        </div>
-    );
-}
- 
+  return (
+    <div className="home">
+      <h2>Homepage</h2>
+    </div>
+  );
+};
+
 export default Home;
 ```
 
 Kurduğumuz eklenti ile `sfc` yazarak hızlı bir şekilde component setup'ı yapabiliyoruz.
+
+## Video 6 - Adding Styles:
+
+index.css
+
+```css
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap");
+
+/* base styles */
+* {
+  margin: 0;
+  font-family: "Quicksand";
+  color: #333;
+}
+.navbar {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  margin: 0 auto;
+  border-bottom: 1px solid #f2f2f2;
+}
+.navbar h1 {
+  color: #f1356d;
+}
+.navbar .links {
+  margin-left: auto;
+}
+.navbar a {
+  margin-left: 16px;
+  text-decoration: none;
+  padding: 6px;
+}
+.navbar a:hover {
+  color: #f1356d;
+}
+.content {
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 20px;
+}
+```
+
+Navbar.js
+
+```js
+const Navbar = () => {
+  return (
+    <nav className="navbar">
+      <h1>The Dojo Blog</h1>
+      <div className="link">
+        <a href="/">Home</a>
+        <a href="/create">New Blog</a>
+        {/* Inline Styling */}
+        {/* <a href="/create" style={{
+                    color: "white",
+                    backgroundColor: "#f1356d",
+                    borderRadius: '8px'
+                }}>New Blog</a> */}
+        {/* Inline Styling */}
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+```
