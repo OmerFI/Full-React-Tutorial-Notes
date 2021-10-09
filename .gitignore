@@ -21,3 +21,5 @@ dojo-blog/.env.production.local
 dojo-blog/npm-debug.log*
 dojo-blog/yarn-debug.log*
 dojo-blog/yarn-error.log*
+
+*.eslintcache
