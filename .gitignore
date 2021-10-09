@@ -6,7 +6,7 @@ dojo-blog/.pnp
 dojo-blog/.pnp.js
 
 # testing
-dojo-blog//coverage
+dojo-blog/coverage
 
 # production
 dojo-blog/build
