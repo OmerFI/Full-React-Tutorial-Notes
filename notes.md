@@ -42,9 +42,9 @@ npm run start
 
 ## Video 3 - Components & Templates
 
-![](note-imgs/React-Components.png)
+![React-Components.png](note-imgs/React-Components.png)
 
-![](note-imgs/React-Components-2.png)
+![React-Components-2.png](note-imgs/React-Components-2.png)
 
 src/App.js
 
@@ -562,3 +562,15 @@ const Home = () => {
 
 export default Home;
 ```
+
+## Video 16 - Using JSON Server
+
+To start the json server:
+```powershell
+npx json-server --watch data/db.json --port 8000
+```
+
+This JSON server provides us some endpoints:
+
+![JSON_Server_Endpoints.png](note-imgs/JSON_Server_Endpoints.png)
+
