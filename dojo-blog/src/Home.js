@@ -2,40 +2,29 @@ import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 
 const Home = () => {
-  const [blogs, setBlogs] = useState([
-    { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
-    { title: "Welcome Party", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    {
-      title: "Web dev top tips",
-      body: "lorem ipsum...",
-      author: "mario",
-      id: 3,
-    },
-  ]);
+  const [blogs, setBlogs] = useState(null);
 
   const [name, setName] = useState("mario");
 
-  const handleDelete = (id) => {
-    const newBlogs = blogs.filter((blog) => blog.id !== id);
-    setBlogs(newBlogs);
-  };
-
-  // useEffect(() => {
-  //   console.log("use effect ran");
-  //   console.log(blogs);
-  // }, []);
-  // what this does an empty dependency array is make sure that this hook
-  // only runs the function after the first initial render.
-
   useEffect(() => {
-    console.log("use effect ran");
-    console.log(name);
-  }, [name]); // this is a dependency.
+    fetch("http://localhost:8000/blogs")
+      .then((res) => {
+        return res.json();
+      })
+      .then((res) => {
+        // setBlogs(res.blogs);
+        console.log(res);
+        setBlogs(res);
+      });
+  }, []);
+  // [] means only ever fire this function once on the initial render not whenever the data changes
 
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />{" "}
-      {/*This is a prop*/}
+      {blogs && <BlogList blogs={blogs} title="All Blogs!" />}
+      {/* buradaki && işareti, önce soldaki kısma bakıyor eğer false ise sağı
+      hiç evaluate etmiyor soldakini işliyor eğer true ise sadece sağdakini
+      evaluate ediyor*/}
       <button
         onClick={() => {
           setName("luigi");
