@@ -1,32 +1,10 @@
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
+import useFetch from "./useFetch";
 
 const Home = () => {
-  const [blogs, setBlogs] = useState(null);
-  const [isPending, setIsPending] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    setTimeout(() => {
-      fetch("http://localhost:8000/blogs")
-        .then((res) => {
-          if (!res.ok) {
-            throw Error("could not fetch the data for that resource");
-          }
-          return res.json();
-        })
-        .then((res) => {
-          setBlogs(res);
-          setIsPending(false);
-          setError(null);
-        })
-        .catch((err) => {
-          setIsPending(false);
-          setError(err.message);
-        });
-    }, 1000); // 1 saniye = 1000 milisaniye
-  }, []);
-
+  const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs");
+       // data'yı blogs olarak al (grab the data but call it blogs)
   return (
     <div className="home">
       {error && <div>{error}</div>}

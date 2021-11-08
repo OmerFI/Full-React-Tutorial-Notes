@@ -700,3 +700,66 @@ const Home = () => {
 export default Home;
 ```
 
+## Video 20 - Making a Custom Hook
+
+Custom hooks in react need to start with this word `use` (i.e. useFetch).
+
+Kodumuzun daha kullanışlı olabilmesi için Home.js içerisinde kullandığımız useEffect içinde fetch işlemini, yeni bir fonksiyon gibi başka dosyaya (useFetch) aktarıp `use` ile başlayan `useFetch` isimli fonksiyon oluşturup içine aktarıyoruz. Böylelikle `useFetch` fonksiyonunu import edip istediğimiz zaman kullanabiliriz.
+
+### useFetch.js
+```js
+import { useState, useEffect } from "react";
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch(url)
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("could not fetch the data for that resource");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setData(data);
+          setIsPending(false);
+          setError(null);
+        })
+        .catch((err) => {
+          setIsPending(false);
+          setError(err.message);
+        });
+    }, 1000);
+  }, [url]); // url parametresine ihtiyacımız olduğundan dolayı, dependency olarak ekliyoruz.
+
+  return { data, isPending, error };
+}
+
+export default useFetch;
+```
+
+### Home.js
+```js
+import { useState, useEffect } from "react";
+import BlogList from "./BlogList";
+import useFetch from "./useFetch";
+
+const Home = () => {
+  const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs");
+       // data'yı blogs olarak al (grab the data but call it blogs)
+  return (
+    <div className="home">
+      {error && <div>{error}</div>}
+      {isPending && <div>Loading...</div>}
+      {blogs && <BlogList blogs={blogs} title="All Blogs!" />}
+    </div>
+  );
+};
+
+export default Home;
+```
+
