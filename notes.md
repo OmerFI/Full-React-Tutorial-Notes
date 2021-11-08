@@ -620,3 +620,38 @@ const Home = () => {
 export default Home;
 ```
 
+## Video 18 - Conditional Loading Message
+
+Home.js
+```js
+import { useState, useEffect } from "react";
+import BlogList from "./BlogList";
+
+const Home = () => {
+  const [blogs, setBlogs] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      fetch("http://localhost:8000/blogs")
+        .then((res) => {
+          return res.json();
+        })
+        .then((res) => {
+          setBlogs(res);
+          setIsPending(false);
+        });
+    }, 1000);
+  }, []);
+
+  return (
+    <div className="home">
+      {isPending && <div>Loading...</div>}
+      {blogs && <BlogList blogs={blogs} title="All Blogs!" />}
+    </div>
+  );
+};
+
+export default Home;
+```
+
