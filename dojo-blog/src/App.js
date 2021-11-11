@@ -1,6 +1,7 @@
 import Navbar from "./Navbar";
 import Home from "./Home";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Create from "./Create";
 
 function App() {
   return (
@@ -12,10 +13,13 @@ function App() {
           go inside Switch Component
           */}
           <Switch>
-            <Route path="/">
+            <Route exact path="/">
               <Home />
             </Route>
-          </Switch> 
+            <Route path="/create">
+              <Create />
+            </Route>
+          </Switch>
           {/*
           Switch component makes sure that
           only one route shows at any one time

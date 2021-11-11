@@ -812,3 +812,54 @@ function App() {
 export default App;
 ```
 
+## Video 22 - Exact Match Routes
+
+### App.js
+```js
+import Navbar from "./Navbar";
+import Home from "./Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Create from "./Create";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/create">
+              <Create />
+            </Route>
+          </Switch>
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+```
+
+Normalde `/create` route'ına istek attığımızda, `/create` dizini `/` in altında olduğundan `/create` e gitmez `/` e gider, bundan kurtulmak için **exact** keyword unu kullandık.
+
+### Create.js
+```js
+const Create = () => {
+  return (
+    <div className="create">
+      <h2>Add a New Blog</h2>
+    </div>
+  );
+};
+
+export default Create;
+```
+
+Yukarıdaki `Create` component inin **css**ini ayarlamasak bile, `index.js` içerisinde `index.css` import ettiğimizden ve App componentimizin de aslında index.js içerisinde bir alt component olduğu için, `index.css` içerisindeki style lar `Create` component imiz için de uygulanıyor.
+
+React üzerinde farklı route'a istek atarken sunucuya tekrardan istek gitmemesi lazım ancak şuanki durumda gidiyor onu da sonraki videoda halledicez.
+
