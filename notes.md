@@ -763,3 +763,52 @@ const Home = () => {
 export default Home;
 ```
 
+## Video 21 - The React Router
+
+![](note-imgs/React-Router-1.png)
+![](note-imgs/React-Router-2.png)
+![](note-imgs/React-Router-3.png)
+![](note-imgs/React-Router-4.png)
+![](note-imgs/React-Router-5.png)
+
+The first thing we need to do is install the react router package because it's not a part of the core react library now to do this we need npm.
+
+```bash
+npm install react-router-dom@5
+```
+
+`@5` kısmı sürümü belirtiyor.
+
+### App.js
+```js
+import Navbar from "./Navbar";
+import Home from "./Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          {/* All of our routes
+          go inside Switch Component
+          */}
+          <Switch>
+            <Route path="/">
+              <Home />
+            </Route>
+          </Switch> 
+          {/*
+          Switch component makes sure that
+          only one route shows at any one time
+          */}
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+```
+
