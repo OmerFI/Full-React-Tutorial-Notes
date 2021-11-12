@@ -863,3 +863,38 @@ Yukarıdaki `Create` component inin **css**ini ayarlamasak bile, `index.js` içe
 
 React üzerinde farklı route'a istek atarken sunucuya tekrardan istek gitmemesi lazım ancak şuanki durumda gidiyor onu da sonraki videoda halledicez.
 
+## Video 23 - Router Links
+
+Normalde
+```html
+<a href="...">...</a>
+```
+şeklinde yazdığımız kısmı
+```html
+<Lint to="...">...</Link>
+```
+olacak şekilde değiştiriyoruz.
+
+### Navbar.js
+```js
+import { Link } from 'react-router-dom';
+
+const Navbar = () => {
+  return (
+    <nav className="navbar">
+      <h1>The Dojo Blog</h1>
+      <div className="links">
+        {/* <a href="/">Home</a>
+        <a href="/create">New Blog</a> */}
+        <Link to="/">Home</Link>
+        <Link to="/create">New Blog</Link>
+      </div>
+    </nav>
+  );
+};
+
+export default Navbar;
+```
+
+Bu işlemin sonucunda, html de yine `a tagi` olarak gözükmesine rağmen, sunucuya tekrardan istek atılmaz, React bu işi halleder.
+
