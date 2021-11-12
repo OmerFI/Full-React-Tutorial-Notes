@@ -959,3 +959,80 @@ export default useFetch;
 
 Reference: https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/
 
+## Video 25 - Route Parameters
+
+Recap (From Comments)
+1. router parameter is the changeable part of the route, for example '.../blogs/blog1', '.../blogs/blog2' where blog1, blog2 is a changeable parameter, like a variable inside a route
+2. import useParams from 'react-router-dom', destructure the parameter and use it in template
+3. To go to detail component, add link to blog list such as
+```html
+<Link to={`/blogs/${id}`}
+```
+
+### App.js
+```js
+import BlogDetails from "./BlogDetails";
+.
+.
+.
+<Switch>
+  <Route exact path="/">
+    <Home />
+  </Route>
+  <Route path="/create">
+    <Create />
+  </Route>
+  {/* Aşağıdaki kısım eklendi */}
+  <Route path="/blogs/:id">
+    <BlogDetails />
+  </Route>
+  {/* ----------------------- */}
+</Switch>
+```
+
+### BlogDetails.js
+```js
+import { useParams } from "react-router";
+
+const BlogDetails = () => {
+  const { id } = useParams();
+
+  return (
+    <div className="blog-details">
+      <h2>Blog details - {id}</h2>
+    </div>
+  );
+};
+
+export default BlogDetails;
+```
+
+Url ile gelen parametreleri çekmek için useParams hook unu kullandık, destructuring ile `App.js` içinde verdiğimiz `id` parametresini çektik ve `h2` etiketimiz içerisinde kullandık
+
+### BlogList.js
+```js
+import { Link } from "react-router-dom";
+
+const BlogList = ({ blogs, title }) => {
+  return (
+    <div className="blog-list">
+      <h2>{title}</h2>
+      {blogs.map((blog) => (
+        <div className="blog-preview" key={blog.id}>
+          <Link to={`/blogs/${blog.id}`}>
+            <h2>{blog.title}</h2>
+            <p>Written by {blog.author}</p>
+          </Link>
+        </div>
+      ))}
+    </div>
+  );
+};
+
+export default BlogList;
+```
+
+Her bir bloga tıklandığı zaman, ``` `/blogs/${blog.id}` ``` route ına gitmesini sağladık
+
+Yukarıda kullandığımız Python'daki formatting işlemine benzer ifadeye, **Template String (Literals)** ismi veriliyor.
+Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
