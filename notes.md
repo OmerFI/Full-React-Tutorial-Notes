@@ -898,3 +898,64 @@ export default Navbar;
 
 Bu işlemin sonucunda, html de yine `a tagi` olarak gözükmesine rağmen, sunucuya tekrardan istek atılmaz, React bu işi halleder.
 
+## Video 24 - useEffect Cleanup
+
+`fetch` is still going on in the background once we've switched to *New Blog* and therefore when the `fetch` is complete it still tries to update the state in the `Home` component but hang on the `Home` component isn't in the browser anymore and that's why we get this error:
+
+![](note-imgs/useEffect-Error.png)
+
+Because it's saying we can't perform a react state update on an unmounted component, the unmounted component is the `Home` one.
+
+### useFetch.js
+```js
+import { useState, useEffect } from "react";
+
+function useFetch(url) {
+  const [data, setData] = useState(null);
+  const [isPending, setIsPending] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    //----------
+    const abortCont = new AbortController();
+    //----------
+    setTimeout(() => {
+      //----------
+      fetch(url, { signal: abortCont.signal })
+        //----------
+        .then((res) => {
+          if (!res.ok) {
+            throw Error("could not fetch the data for that resource");
+          }
+          return res.json();
+        })
+        .then((data) => {
+          setData(data);
+          setIsPending(false);
+          setError(null);
+        })
+        .catch((err) => {
+          //----------
+          if (err.name === "AbortError") {
+            //----------
+            console.log("fetch aborted");
+          } else {
+            setIsPending(false);
+            setError(err.message);
+          }
+        });
+    }, 1000);
+
+    // return () => console.log("cleanup");
+    return () => abortCont.abort();
+    // yukarıdaki fonksiyon, Home'dayken Create kısmına gittiğimiz zaman çalıştırılıyor
+  }, [url]); // url parametresine ihtiyacımız olduğundan dolayı, dependency olarak ekliyoruz.
+
+  return { data, isPending, error };
+}
+
+export default useFetch;
+```
+
+Reference: https://blog.logrocket.com/understanding-react-useeffect-cleanup-function/
+
