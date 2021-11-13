@@ -1072,3 +1072,73 @@ export default BlogDetails;
 
 Bunlara ilave olarak daha güzel gözükmesi için birazcık `CSS` ekledik.
 
+## Video 27 - Controlled Inputs (forms)
+
+Recap (From Comments)
+
+This episode talks about two-way data binding (a very important concept in reactjs, usually used in form element)
+1. Assign a dynamic value to `value` attribute of `input/textarea/select` element. 
+example:
+```js
+const [name, setName] = useState('mario')
+<input value={name}></input>
+```
+2. Listen `change` event with a handler (anonymous function) to set value, for example:
+```html
+<input onChange={e=>setValue(e.target.name)}>
+```
+
+### Create.js
+```js
+import { useState } from "react";
+
+const Create = () => {
+  const [title, setTitle] = useState("");
+  const [body, setBody] = useState("");
+  const [author, setAuthor] = useState("yoshi");
+
+  return (
+    <div className="create">
+      <h2>Add a New Blog</h2>
+      <form>
+        <label>Blog title:</label>
+        <input
+          type="text"
+          required
+          value={title}
+          onChange={(e) => {
+            setTitle(e.target.value);
+          }}
+        />
+        <label>Blog body:</label>
+        <textarea
+          required
+          value={body}
+          onChange={(e) => {
+            setBody(e.target.value);
+          }}
+        ></textarea>
+        <label>Blog author:</label>
+        <select
+          value={author}
+          onChange={(e) => {
+            setAuthor(e.target.value);
+          }}
+        >
+          <option value="mario">mario</option>
+          <option value="yoshi">yoshi</option>
+        </select>
+        <button>Add Blog</button>
+        <p>{title}</p>
+        <p>{body}</p>
+        <p>{author}</p>
+      </form>
+    </div>
+  );
+};
+
+export default Create;
+```
+
+Bunlara ilave olarak daha güzel gözükmesi için birazcık `CSS` ekledik.
+
