@@ -1142,3 +1142,35 @@ export default Create;
 
 Bunlara ilave olarak daha güzel gözükmesi için birazcık `CSS` ekledik.
 
+## Video 28 - Submit Events
+
+~Notes~ (From Comments)
+
+Handle form submission in reactjs
+
+1. Assign a handler to submit event in form element
+2. Within submit handler we prevent page refresh
+3. Implement post request with fetch api to send post data to designated api
+
+### Create.js
+```js
+.
+.
+.
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const blog = { title, body, author };
+
+  console.log(blog);
+};
+```
+```html
+.
+.
+.
+<form onSubmit={handleSubmit}>
+.
+.
+.
+```
+
