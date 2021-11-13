@@ -1036,3 +1036,39 @@ Her bir bloga tıklandığı zaman, ``` `/blogs/${blog.id}` ``` route ına gitme
 
 Yukarıda kullandığımız Python'daki formatting işlemine benzer ifadeye, **Template String (Literals)** ismi veriliyor.
 Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
+
+## Video 26 - Reusing Custom Hooks
+
+### BlogDetail.js
+```js
+import { useParams } from "react-router";
+import useFetch from "./useFetch";
+
+const BlogDetails = () => {
+  const { id } = useParams();
+  const {
+    data: blog,
+    error,
+    isPending,
+  } = useFetch("http://localhost:8000/blogs/" + id);
+
+  return (
+    <div className="blog-details">
+      {isPending && <div>Loading...</div>}
+      {error && <div>{error}</div>}
+      {blog && (
+        <article>
+          <h2>{blog.title}</h2>
+          <p>Written by {blog.author}</p>
+          <div>{blog.body}</div>
+        </article>
+      )}
+    </div>
+  );
+};
+
+export default BlogDetails;
+```
+
+Bunlara ilave olarak daha güzel gözükmesi için birazcık `CSS` ekledik.
+
