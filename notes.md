@@ -1251,3 +1251,36 @@ const handleSubmit = (e) => {
 ...
 ```
 
+## Video 31 - Deleting Blogs
+
+Blog silme işlemi için `DELETE` isteği atmamız gerekiyor.
+
+### BlogDetails.js
+```js
+import { useHistory, useParams } from "react-router";
+.
+.
+.
+const history = useHistory();
+
+const handleClick = () => {
+  fetch("http://localhost:8000/blogs/" + blog.id, {
+    method: "DELETE",
+  }).then(() => {
+    history.push("/");
+  });
+};
+.
+.
+.
+```
+```html
+<article>
+  ...
+  <button onClick={handleClick}>delete</button>
+</article>
+...
+```
+
+Bunlara ilave olarak daha `button` elementinin güzel gözükmesi için birazcık `CSS` ekledik.
+
