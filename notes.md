@@ -1359,7 +1359,7 @@ Bunlara ilave olarak daha `button` elementinin güzel gözükmesi için birazcı
 
 ## Video 32 - 404 Pages & Next Steps
 
-404 sayfalarını özelleştirmek için `NotFound.js` component imizi oluşturduk, **App.js** içerisinde 404 Route'larını `*` kullanarak belirttik
+404 sayfalarını özelleştirmek için `NotFound.js` component imizi oluşturduk, **App.js** içerisinde 404 Route'larını `*` kullanarak belirttik.
 
 ### NotFound.js
 
