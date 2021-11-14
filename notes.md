@@ -1174,3 +1174,36 @@ const handleSubmit = (e) => {
 .
 ```
 
+## Video 29 - Making a POST Request
+
+Yeni bir blog oluşturduktan sonra, Json serverimizde güncellemek için, Server Endpoint'imize `POST` isteği attık.
+
+### Create.js
+```js
+.
+.
+.
+const [isPending, setIsPending] = useState(false);
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const blog = { title, body, author };
+
+  setIsPending(true);
+
+  fetch("http://localhost:8000/blogs", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(blog),
+  }).then(() => {
+    console.log("new blog added");
+    setIsPending(false);
+  });
+};
+.
+.
+.
+{!isPending && <button>Add Blog</button>}
+{isPending && <button>Adding Blog...</button>}
+```
+
