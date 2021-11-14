@@ -1207,3 +1207,47 @@ const handleSubmit = (e) => {
 {isPending && <button>Adding Blog...</button>}
 ```
 
+## Video 30 - Programmatic Redirects
+
+Yeni bir blog oluşturduktan sonra başka sayfaya `redirect` etmesi işlemi
+
+Summary of this tutorial (From Comments):
+Programmatically redirect
+1. Destructure useHistory from `react-router-dom`
+2. Assign useHistory to `history` variable
+2. Using `history.push(path)` to redirect to certain path
+
+
+### Create.js
+```js
+...
+import { useHistory } from "react-router-dom";
+.
+.
+.
+const history = useHistory();
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  const blog = { title, body, author };
+
+  setIsPending(true);
+
+  fetch("http://localhost:8000/blogs", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(blog),
+  }).then(() => {
+    console.log("new blog added");
+    setIsPending(false);
+
+    // history.go(-1);
+    // -1 yazmak, history (geçmiş)te 1 geriye gitmek demektir
+
+    history.push("/");
+    // `/` dizinine git demek
+  });
+};
+...
+```
+
