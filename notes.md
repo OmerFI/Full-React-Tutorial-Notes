@@ -267,34 +267,37 @@ When we need a reactive value something that might change at some point we use t
 Aldığımız destructured listin ilk elemanı, verdiğimiz değişken; ikincisi ise onu değiştiren fonksiyon.
 
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
-const [name, setName] = useState('mario');
+const [name, setName] = useState("mario");
 const [age, setAge] = useState(25);
 ```
 
 Home.js
+
 ```js
-import { useState } from 'react';
+import { useState } from "react";
 
 const Home = () => {
   // let name = 'mario';
-  const [name, setName] = useState('mario');
+  const [name, setName] = useState("mario");
   const [age, setAge] = useState(25);
 
   // otomatik olarak event object verilir fonksiyona
   const handleClick = (e) => {
     // name = 'luigi';
     // console.log(name) // luigi yazdırmasına rağmen, template'de update yapmıyor
-    
-    setName('luigi'); // this value is reactive
+
+    setName("luigi"); // this value is reactive
     setAge(30);
   };
 
   return (
     <div className="home">
       <h2>Homepage</h2>
-      <p>{ name } is { age } years old</p>
+      <p>
+        {name} is {age} years old
+      </p>
       <button onClick={handleClick}>Click me</button>
     </div>
   );
@@ -306,6 +309,7 @@ export default Home;
 ## Video 10 - Outputting Lists
 
 Home.js
+
 ```js
 import { useState } from "react";
 
@@ -313,14 +317,19 @@ const Home = () => {
   const [blogs, setBlogs] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
     { title: "Welcome Party", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    { title: "Web dev top tips", body: "lorem ipsum...", author: "mario", id: 3},
+    {
+      title: "Web dev top tips",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
   ]);
   return (
     <div className="home">
       {blogs.map((blog) => (
         <div className="blog-preview" key={blog.id}>
-          <h2>{ blog.title }</h2>
-          <p>Written by { blog.author }</p>
+          <h2>{blog.title}</h2>
+          <p>Written by {blog.author}</p>
         </div>
       ))}
     </div>
@@ -331,6 +340,7 @@ export default Home;
 ```
 
 index.css (added)
+
 ```css
 /* blog previews / list */
 .blog-preview {
@@ -339,7 +349,7 @@ index.css (added)
   border-bottom: 1px solid #fafafa;
 }
 .blog-preview:hover {
-  box-shadow: 1px 3px 5px rgba(0,0,0,0.1);
+  box-shadow: 1px 3px 5px rgba(0, 0, 0, 0.1);
 }
 .blog-preview h2 {
   font-size: 20px;
@@ -353,6 +363,7 @@ index.css (added)
 Django'da, templatelere parametre göndermek ile çok benzer şeyler. Bir component'dan diğerine parametre göndermek için kullanılıyor.
 
 Home.js
+
 ```js
 import { useState } from "react";
 import BlogList from "./BlogList";
@@ -361,7 +372,12 @@ const Home = () => {
   const [blogs, setBlogs] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
     { title: "Welcome Party", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    { title: "Web dev top tips", body: "lorem ipsum...", author: "mario", id: 3},
+    {
+      title: "Web dev top tips",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
   ]);
   return (
     <div className="home">
@@ -374,13 +390,12 @@ export default Home;
 ```
 
 BlogList.js
+
 ```js
 // const BlogList = (props) => {
-  // const blogs = props.blogs;
-  // const title = props.title;
-const BlogList = ({blogs, title}) => {
-
-
+// const blogs = props.blogs;
+// const title = props.title;
+const BlogList = ({ blogs, title }) => {
   return (
     <div className="blog-list">
       <h2>{title}</h2>
@@ -400,6 +415,7 @@ export default BlogList;
 ## Video 12 - Reusing Components
 
 Home.js
+
 ```js
 import { useState } from "react";
 import BlogList from "./BlogList";
@@ -408,12 +424,22 @@ const Home = () => {
   const [blogs, setBlogs] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
     { title: "Welcome Party", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    { title: "Web dev top tips", body: "lorem ipsum...", author: "mario", id: 3},
+    {
+      title: "Web dev top tips",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
   ]);
   return (
     <div className="home">
       <BlogList blogs={blogs} title="All Blogs!" /> {/*This is a prop*/}
-      <BlogList blogs={blogs.filter((blog) => {return blog.author === "mario"})} title="Mario's Blogs!" /> {/*This is a prop*/}
+      <BlogList
+        blogs={blogs.filter((blog) => {
+          return blog.author === "mario";
+        })}
+        title="Mario's Blogs!"
+      /> {/*This is a prop*/}
     </div>
   );
 };
@@ -424,6 +450,7 @@ export default Home;
 ## Video 13 - Functions as Props
 
 Home.js
+
 ```js
 import { useState } from "react";
 import BlogList from "./BlogList";
@@ -432,17 +459,23 @@ const Home = () => {
   const [blogs, setBlogs] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
     { title: "Welcome Party", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    { title: "Web dev top tips", body: "lorem ipsum...", author: "mario", id: 3},
+    {
+      title: "Web dev top tips",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
   ]);
 
   const handleDelete = (id) => {
-    const newBlogs = blogs.filter(blog => blog.id !== id);
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
     setBlogs(newBlogs);
-  }
+  };
 
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} /> {/*This is a prop*/}
+      <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />{" "}
+      {/*This is a prop*/}
     </div>
   );
 };
@@ -451,6 +484,7 @@ export default Home;
 ```
 
 BlogList.js
+
 ```js
 const BlogList = ({ blogs, title, handleDelete }) => {
   return (
@@ -475,6 +509,7 @@ export default BlogList;
 useEffect hook is a way to run code on every render.
 
 Home.js
+
 ```js
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
@@ -483,22 +518,28 @@ const Home = () => {
   const [blogs, setBlogs] = useState([
     { title: "My new website", body: "lorem ipsum...", author: "mario", id: 1 },
     { title: "Welcome Party", body: "lorem ipsum...", author: "yoshi", id: 2 },
-    { title: "Web dev top tips", body: "lorem ipsum...", author: "mario", id: 3},
+    {
+      title: "Web dev top tips",
+      body: "lorem ipsum...",
+      author: "mario",
+      id: 3,
+    },
   ]);
 
   const handleDelete = (id) => {
-    const newBlogs = blogs.filter(blog => blog.id !== id);
+    const newBlogs = blogs.filter((blog) => blog.id !== id);
     setBlogs(newBlogs);
-  }
+  };
 
   useEffect(() => {
-    console.log('use effect ran');
+    console.log("use effect ran");
     console.log(blogs);
   });
 
   return (
     <div className="home">
-      <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} /> {/*This is a prop*/}
+      <BlogList blogs={blogs} title="All Blogs!" handleDelete={handleDelete} />{" "}
+      {/*This is a prop*/}
     </div>
   );
 };
@@ -509,6 +550,7 @@ export default Home;
 ## Video 15 - useEffect Dependencies
 
 Home.js
+
 ```js
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
@@ -566,6 +608,7 @@ export default Home;
 ## Video 16 - Using JSON Server
 
 To start the json server:
+
 ```powershell
 npx json-server --watch data/db.json --port 8000
 ```
@@ -577,6 +620,7 @@ This JSON server provides us some endpoints:
 ## Video 17 - Fetching Data with useEffect
 
 Home.js
+
 ```js
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
@@ -623,6 +667,7 @@ export default Home;
 ## Video 18 - Conditional Loading Message
 
 Home.js
+
 ```js
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
@@ -658,6 +703,7 @@ export default Home;
 ## Video 19 - Handling Fetch Errors
 
 Home.js
+
 ```js
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
@@ -707,6 +753,7 @@ Custom hooks in react need to start with this word `use` (i.e. useFetch).
 Kodumuzun daha kullanışlı olabilmesi için Home.js içerisinde kullandığımız useEffect içinde fetch işlemini, yeni bir fonksiyon gibi başka dosyaya (useFetch) aktarıp `use` ile başlayan `useFetch` isimli fonksiyon oluşturup içine aktarıyoruz. Böylelikle `useFetch` fonksiyonunu import edip istediğimiz zaman kullanabiliriz.
 
 ### useFetch.js
+
 ```js
 import { useState, useEffect } from "react";
 
@@ -743,14 +790,19 @@ export default useFetch;
 ```
 
 ### Home.js
+
 ```js
 import { useState, useEffect } from "react";
 import BlogList from "./BlogList";
 import useFetch from "./useFetch";
 
 const Home = () => {
-  const { data: blogs, isPending, error } = useFetch("http://localhost:8000/blogs");
-       // data'yı blogs olarak al (grab the data but call it blogs)
+  const {
+    data: blogs,
+    isPending,
+    error,
+  } = useFetch("http://localhost:8000/blogs");
+  // data'yı blogs olarak al (grab the data but call it blogs)
   return (
     <div className="home">
       {error && <div>{error}</div>}
@@ -780,6 +832,7 @@ npm install react-router-dom@5
 `@5` kısmı sürümü belirtiyor.
 
 ### App.js
+
 ```js
 import Navbar from "./Navbar";
 import Home from "./Home";
@@ -798,7 +851,7 @@ function App() {
             <Route path="/">
               <Home />
             </Route>
-          </Switch> 
+          </Switch>
           {/*
           Switch component makes sure that
           only one route shows at any one time
@@ -815,6 +868,7 @@ export default App;
 ## Video 22 - Exact Match Routes
 
 ### App.js
+
 ```js
 import Navbar from "./Navbar";
 import Home from "./Home";
@@ -847,6 +901,7 @@ export default App;
 Normalde `/create` route'ına istek attığımızda, `/create` dizini `/` in altında olduğundan `/create` e gitmez `/` e gider, bundan kurtulmak için **exact** keyword unu kullandık.
 
 ### Create.js
+
 ```js
 const Create = () => {
   return (
@@ -866,18 +921,23 @@ React üzerinde farklı route'a istek atarken sunucuya tekrardan istek gitmemesi
 ## Video 23 - Router Links
 
 Normalde
+
 ```html
 <a href="...">...</a>
 ```
+
 şeklinde yazdığımız kısmı
+
 ```html
 <Lint to="...">...</Link>
 ```
+
 olacak şekilde değiştiriyoruz.
 
 ### Navbar.js
+
 ```js
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -900,13 +960,14 @@ Bu işlemin sonucunda, html de yine `a tagi` olarak gözükmesine rağmen, sunuc
 
 ## Video 24 - useEffect Cleanup
 
-`fetch` is still going on in the background once we've switched to *New Blog* and therefore when the `fetch` is complete it still tries to update the state in the `Home` component but hang on the `Home` component isn't in the browser anymore and that's why we get this error:
+`fetch` is still going on in the background once we've switched to _New Blog_ and therefore when the `fetch` is complete it still tries to update the state in the `Home` component but hang on the `Home` component isn't in the browser anymore and that's why we get this error:
 
 ![](note-imgs/useEffect-Error.png)
 
 Because it's saying we can't perform a react state update on an unmounted component, the unmounted component is the `Home` one.
 
 ### useFetch.js
+
 ```js
 import { useState, useEffect } from "react";
 
@@ -962,14 +1023,17 @@ Reference: https://blog.logrocket.com/understanding-react-useeffect-cleanup-func
 ## Video 25 - Route Parameters
 
 Recap (From Comments)
+
 1. router parameter is the changeable part of the route, for example '.../blogs/blog1', '.../blogs/blog2' where blog1, blog2 is a changeable parameter, like a variable inside a route
 2. import useParams from 'react-router-dom', destructure the parameter and use it in template
 3. To go to detail component, add link to blog list such as
+
 ```html
 <Link to={`/blogs/${id}`}
 ```
 
 ### App.js
+
 ```js
 import BlogDetails from "./BlogDetails";
 .
@@ -991,6 +1055,7 @@ import BlogDetails from "./BlogDetails";
 ```
 
 ### BlogDetails.js
+
 ```js
 import { useParams } from "react-router";
 
@@ -1010,6 +1075,7 @@ export default BlogDetails;
 Url ile gelen parametreleri çekmek için useParams hook unu kullandık, destructuring ile `App.js` içinde verdiğimiz `id` parametresini çektik ve `h2` etiketimiz içerisinde kullandık
 
 ### BlogList.js
+
 ```js
 import { Link } from "react-router-dom";
 
@@ -1032,7 +1098,7 @@ const BlogList = ({ blogs, title }) => {
 export default BlogList;
 ```
 
-Her bir bloga tıklandığı zaman, ``` `/blogs/${blog.id}` ``` route ına gitmesini sağladık
+Her bir bloga tıklandığı zaman, `` `/blogs/${blog.id}` `` route ına gitmesini sağladık
 
 Yukarıda kullandığımız Python'daki formatting işlemine benzer ifadeye, **Template String (Literals)** ismi veriliyor.
 Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals
@@ -1040,6 +1106,7 @@ Reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Tem
 ## Video 26 - Reusing Custom Hooks
 
 ### BlogDetail.js
+
 ```js
 import { useParams } from "react-router";
 import useFetch from "./useFetch";
@@ -1077,18 +1144,23 @@ Bunlara ilave olarak daha güzel gözükmesi için birazcık `CSS` ekledik.
 Recap (From Comments)
 
 This episode talks about two-way data binding (a very important concept in reactjs, usually used in form element)
-1. Assign a dynamic value to `value` attribute of `input/textarea/select` element. 
-example:
+
+1. Assign a dynamic value to `value` attribute of `input/textarea/select` element.
+   example:
+
 ```js
 const [name, setName] = useState('mario')
 <input value={name}></input>
 ```
+
 2. Listen `change` event with a handler (anonymous function) to set value, for example:
+
 ```html
 <input onChange={e=>setValue(e.target.name)}>
 ```
 
 ### Create.js
+
 ```js
 import { useState } from "react";
 
@@ -1153,6 +1225,7 @@ Handle form submission in reactjs
 3. Implement post request with fetch api to send post data to designated api
 
 ### Create.js
+
 ```js
 .
 .
@@ -1164,14 +1237,10 @@ const handleSubmit = (e) => {
   console.log(blog);
 };
 ```
+
 ```html
-.
-.
-.
-<form onSubmit={handleSubmit}>
-.
-.
-.
+. . .
+<form onSubmit="{handleSubmit}">. . .</form>
 ```
 
 ## Video 29 - Making a POST Request
@@ -1179,6 +1248,7 @@ const handleSubmit = (e) => {
 Yeni bir blog oluşturduktan sonra, Json serverimizde güncellemek için, Server Endpoint'imize `POST` isteği attık.
 
 ### Create.js
+
 ```js
 .
 .
@@ -1213,12 +1283,13 @@ Yeni bir blog oluşturduktan sonra başka sayfaya `redirect` etmesi işlemi
 
 Summary of this tutorial (From Comments):
 Programmatically redirect
+
 1. Destructure useHistory from `react-router-dom`
 2. Assign useHistory to `history` variable
-2. Using `history.push(path)` to redirect to certain path
-
+3. Using `history.push(path)` to redirect to certain path
 
 ### Create.js
+
 ```js
 ...
 import { useHistory } from "react-router-dom";
@@ -1256,6 +1327,7 @@ const handleSubmit = (e) => {
 Blog silme işlemi için `DELETE` isteği atmamız gerekiyor.
 
 ### BlogDetails.js
+
 ```js
 import { useHistory, useParams } from "react-router";
 .
@@ -1274,13 +1346,81 @@ const handleClick = () => {
 .
 .
 ```
+
 ```html
 <article>
   ...
-  <button onClick={handleClick}>delete</button>
+  <button onClick="{handleClick}">delete</button>
 </article>
 ...
 ```
 
 Bunlara ilave olarak daha `button` elementinin güzel gözükmesi için birazcık `CSS` ekledik.
 
+## Video 32 - 404 Pages & Next Steps
+
+404 sayfalarını özelleştirmek için `NotFound.js` component imizi oluşturduk, **App.js** içerisinde 404 Route'larını `*` kullanarak belirttik
+
+### NotFound.js
+
+```js
+import { Link } from "react-router-dom";
+
+const NotFound = () => {
+  return (
+    <div className="not-found">
+      <h2>Sorry</h2>
+      <p>That page cannot be found</p>
+      <Link to="/">Back to the homepage...</Link>
+    </div>
+  );
+};
+
+export default NotFound;
+```
+
+### App.js
+
+```js
+import Navbar from "./Navbar";
+import Home from "./Home";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Create from "./Create";
+import BlogDetails from "./BlogDetails";
+import NotFound from "./NotFound";
+
+function App() {
+  return (
+    <Router>
+      <div className="App">
+        <Navbar />
+        <div className="content">
+          {/* All of our routes
+          go inside Switch Component
+          */}
+          <Switch>
+            <Route exact path="/">
+              <Home />
+            </Route>
+            <Route path="/create">
+              <Create />
+            </Route>
+            <Route path="/blogs/:id">
+              <BlogDetails />
+            </Route>
+            <Route path="*">
+              <NotFound />
+            </Route>
+          </Switch>
+          {/*
+          Switch component makes sure that
+          only one route shows at any one time
+          */}
+        </div>
+      </div>
+    </Router>
+  );
+}
+
+export default App;
+```
